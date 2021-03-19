@@ -23,28 +23,28 @@ function SetDurations(props) {
   const clickIncreaseFocus =()=> 
   {if(currentState.focusDuration<=3540&& currentState.stopped)
     {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration + 60}))}
-    else if(currentState.focusDuration>3540&&currentState.focusDuration<3600&&!runningProp){
+    else if(currentState.focusDuration>3540&&currentState.focusDuration<3600&&currentState.stopped){
       {setProp((prevState)=>({...prevState,focusDuration: prevState.maxFocus}))}
     }else{return null}}
 
   const clickDecreaseFocus =()=>
   {if(currentState.focusDuration>=360&&currentState.stopped)
     {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration - 60}))}
-    else if(currentState.focusDuration>360&&currentState.focusDuration>300&&!runningProp){
+    else if(currentState.focusDuration>360&&currentState.focusDuration>300&&currentState.stopped){
       {setProp((prevState)=>({...prevState,focusDuration: prevState.minFocus}))}
     }else{return null}}
 
   const clickIncreaseBreak =()=>
   {if(currentState.breakDuration<=840&& currentState.stopped)
     {setProp((prevState)=>({...prevState,breakDuration: prevState.breakDuration + 60}))}
-    else if(currentState.breakDuration>840&&currentState.breakDuration<900&&!runningProp){
+    else if(currentState.breakDuration>840&&currentState.breakDuration<900&&currentState.stopped){
       {setProp((prevState)=>({...prevState,breakDuration: prevState.maxBreak}))}
     }else{return null}}
   
     const clickDecreaseBreak =()=>
     {if(currentState.breakDuration>=120&& currentState.stopped)
       {setProp((prevState)=>({...prevState,breakDuration: prevState.breakDuration - 60}))}
-      else if(currentState.breakDuration<120&&currentState.breakDuration<900&&!runningProp){
+      else if(currentState.breakDuration<120&&currentState.breakDuration<900&&currentState.stopped){
         {setProp((prevState)=>({...prevState,breakDuration: prevState.minBreak}))}
       }else{return null}}
   
