@@ -3,8 +3,9 @@ import useInterval from "../utils/useInterval";
 import classNames from "../utils/class-names";
 import {minutesToDuration} from '../utils/duration';
 import {secondsToDuration} from '../utils/duration';
-import SetDurations from "./SetDurations"
-import Control from "./Control"
+import SetDurations from "./SetDurations";
+import Control from "./Control";
+import Display from "./Display";
 
 function Pomodoro() {
   // Timer starts out paused
@@ -17,7 +18,7 @@ function Pomodoro() {
     maxBreak:15*60,
     minBreak:1*60,
     stopped: true,
-    progress: 0,
+    progress: 0, //change back  to ZEROOOO!!!
     focus: true
   }
   const [pomodoroSettings, setPomodoroSettings]= useState({...defaultPomodoro})
@@ -35,38 +36,27 @@ function Pomodoro() {
     setIsTimerRunning((prevState) => !prevState);
     setPomodoroSettings((prevState)=>({...prevState,stopped:false}))
   }
+  function session(){if(pomodoroSettings.focus === true){
+    if (pomodoroSettings.progress===pomodoroSettings.focusDuration){
+      setPomodoroSettings((prevState)=>({...prevState,focus:!prevState.focus}));    
+      setPomodoroSettings((prevState)=>({...prevState,progress:0}));
+      new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
+    }
+  }else{
+    if (pomodoroSettings.progress===pomodoroSettings.breakDuration){
+      setPomodoroSettings((prevState)=>({...prevState,focus:!prevState.focus}));
+      setPomodoroSettings((prevState)=>({...prevState,progress:0}));
+      new Audio(`https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`).play();
+    }
 
+  }
+  }
+session()
   return (
     <div className="pomodoro">
       <SetDurations timeManageProp={minutesToDuration} runningProp = {isTimerRunning} currentState={pomodoroSettings} setProp={setPomodoroSettings} />
       <Control propControl={playPause} runningProp = {isTimerRunning} stopProp={setIsTimerRunning}setProp={setPomodoroSettings}/>
-      <div>
-        {/* TODO: This area should show only when a focus or break session is running or pauses */}
-        <div className="row mb-2">
-          <div className="col">
-            {/* TODO: Update message below to include current session (Focusing or On Break) and total duration */}
-            <h2 data-testid="session-title">Focusing for 25:00 minutes</h2>
-            {/* TODO: Update message below to include time remaining in the current session */}
-            <p className="lead" data-testid="session-sub-title">
-              25:00 remaining
-            </p>
-          </div>
-        </div>
-        <div className="row mb-2">
-          <div className="col">
-            <div className="progress" style={{ height: "20px" }}>
-              <div
-                className="progress-bar"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow="0" // TODO: Increase aria-valuenow as elapsed time increases
-                style={{ width: "0%" }} // TODO: Increase width % as elapsed time increases
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Display currentState={pomodoroSettings} timeSeconds={secondsToDuration}/>
     </div>
   );
 }

@@ -23,6 +23,7 @@ function Control(props) {
     stopProp(false);
     setProp((prevState)=>({...prevState,stopped:true}));
     setProp((prevState)=>({...prevState,progress:0}));
+    setProp((prevState)=>({...prevState,focus:true}));
   }
 
   return (
