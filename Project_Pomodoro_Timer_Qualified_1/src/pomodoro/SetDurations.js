@@ -21,16 +21,16 @@ function SetDurations(props) {
   const {currentState, setProp, runningProp, timeManageProp} = props
   
   const clickIncreaseFocus =()=> 
-  {if(currentState.focusDuration<=3540&& currentState.stopped)
-    {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration + 60}))}
-    else if(currentState.focusDuration>3540&&currentState.focusDuration<3600&&currentState.stopped){
+  {if(currentState.focusDuration<=3300&& currentState.stopped)
+    {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration + 300}))}
+    else if(currentState.focusDuration>3300&&currentState.focusDuration<3600&&currentState.stopped){
       {setProp((prevState)=>({...prevState,focusDuration: prevState.maxFocus}))}
     }else{return null}}
 
   const clickDecreaseFocus =()=>
-  {if(currentState.focusDuration>=360&&currentState.stopped)
-    {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration - 60}))}
-    else if(currentState.focusDuration>360&&currentState.focusDuration>300&&currentState.stopped){
+  {if(currentState.focusDuration>=900&&currentState.stopped)
+    {setProp((prevState)=>({...prevState,focusDuration: prevState.focusDuration - 300}))}
+    else if(currentState.focusDuration<900&&currentState.focusDuration>300&&currentState.stopped){
       {setProp((prevState)=>({...prevState,focusDuration: prevState.minFocus}))}
     }else{return null}}
 

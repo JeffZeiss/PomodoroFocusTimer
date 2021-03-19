@@ -56,7 +56,7 @@ session()
     <div className="pomodoro">
       <SetDurations timeManageProp={minutesToDuration} runningProp = {isTimerRunning} currentState={pomodoroSettings} setProp={setPomodoroSettings} />
       <Control propControl={playPause} runningProp = {isTimerRunning} stopProp={setIsTimerRunning}setProp={setPomodoroSettings}/>
-      <Display currentState={pomodoroSettings} timeSeconds={secondsToDuration}/>
+      <Display runningProp = {isTimerRunning} currentState={pomodoroSettings} timeSeconds={secondsToDuration}/>
     </div>
   );
 }
