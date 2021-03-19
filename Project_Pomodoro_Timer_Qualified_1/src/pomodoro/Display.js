@@ -16,42 +16,42 @@ function Display(props) {
   //   progress: 0,
   //   focus: true
   // }
-  const {currentState,timeSeconds, runningProp}=props;
-  const {stopped, focus, progress, focusDuration, breakDuration}=currentState;
-console.log(((progress/(focus?focusDuration:breakDuration))*100));
+  const { currentState, timeSeconds, runningProp } = props;
+  const { stopped, focus, progress, focusDuration, breakDuration } = currentState;
+  console.log(((progress / (focus ? focusDuration : breakDuration)) * 100));
 
-  if(stopped===true){return null}
-  
+  if (stopped === true) { return null }
+
   return (
     <div>
-    {/* TODO: This area should show only when a focus or break session is running or pauses */}
-    <div className="row mb-2">
-      <div className="col">
-        {/* TODO: Update message below to include current session (Focusing or On Break) and total duration */}
-        <h2 data-testid="session-title">{focus?"Focusing":"On Break"} for {focus?timeSeconds(focusDuration):timeSeconds(breakDuration)} minutes</h2>
-        {/* TODO: Update message below to include time remaining in the current session */}
-        <p className="lead" data-testid="session-sub-title">
-          {focus?timeSeconds(focusDuration-progress):timeSeconds(breakDuration-progress)} remaining
+      {/* TODO: This area should show only when a focus or break session is running or pauses */}
+      <div className="row mb-2">
+        <div className="col">
+          {/* TODO: Update message below to include current session (Focusing or On Break) and total duration */}
+          <h2 data-testid="session-title">{focus ? "Focusing" : "On Break"} for {focus ? timeSeconds(focusDuration) : timeSeconds(breakDuration)} minutes</h2>
+          {/* TODO: Update message below to include time remaining in the current session */}
+          <p className="lead" data-testid="session-sub-title">
+            {focus ? timeSeconds(focusDuration - progress) : timeSeconds(breakDuration - progress)} remaining
         </p>
 
-        {!runningProp?<h3>Paused</h3>:null}
+          {!runningProp ? <h3>Paused</h3> : null}
+        </div>
       </div>
-    </div>
-    <div className="row mb-2">
-      <div className="col">
-        <div className="progress" style={{ height: "20px" }}>
-          <div
-            className="progress-bar"
-            role="progressbar"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow={((progress/(focus?focusDuration:breakDuration))*100)} // TODO: Increase aria-valuenow as elapsed time increases
-            style={{ width: `${((progress/(focus?focusDuration:breakDuration))*100)}%` }} // TODO: Increase width % as elapsed time increases
-          />
+      <div className="row mb-2">
+        <div className="col">
+          <div className="progress" style={{ height: "20px" }}>
+            <div
+              className="progress-bar"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow={((progress / (focus ? focusDuration : breakDuration)) * 100)} // TODO: Increase aria-valuenow as elapsed time increases
+              style={{ width: `${((progress / (focus ? focusDuration : breakDuration)) * 100)}%` }} // TODO: Increase width % as elapsed time increases
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
 
